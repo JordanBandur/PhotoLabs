@@ -2,15 +2,14 @@ import React from "react";
 
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = (props) => {
+const PhotoListItem = ({ photo }) => {
   return (
-    <section id={props.id}>
-      <img src={props.imageSource}/>
-      <img src={props.profile} />
-      <p>{props.username}</p>
-      <p>{props.location.city}, {props.location.country}</p>
+    <section id={photo.id}>
+      <img src={photo.imageSource} />
+      <img src={photo.profile} />
+      <p>{photo.username}</p>
+      <p>{photo.location.city}, {photo.location.country}</p>
     </section>
-
   );
 };
 
