@@ -4,7 +4,7 @@ import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = ({ photo }) => {
   return (
-    <article id={photo.id} className="photo-list__item">
+    <article className="photo-list__item">
       <img src={photo.imageSource} alt={`${photo.username}'s photo`} className="photo-list__image"  />
       <section className="photo-list__user-details">
         <img src={photo.profile} alt={`${photo.username}'s profile`} className="photo-list__user-profile" />
