@@ -4,26 +4,15 @@ import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = ({ photo }) => {
   return (
-    <article id={photo.id}>
-      <img src={photo.imageSource} />
-      <img src={photo.profile} />
-      <p>{photo.username}</p>
-      <p>{photo.location.city}, {photo.location.country}</p>
+    <article className="photo-list__item" id={photo.id}>
+      <img className="photo-list__image" src={photo.imageSource} />
+      <img className="photo-list__user-profile" src={photo.profile} />
+      <section className="photo-list__user-details">
+        <p className="photo-list__user-info">{photo.username}</p>
+        <p className="photo-list__user-info photo-list__user-location ">{photo.location.city}, {photo.location.country}</p>
+      </section>
     </article>
   );
-};
-
-PhotoListItem.propTypes = {
-  photo: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    imageSource: PropTypes.string.isRequired,
-    profile: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      city: PropTypes.string.isRequired,
-      country: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
 };
 
 export default PhotoListItem;
