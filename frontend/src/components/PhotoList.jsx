@@ -2,11 +2,16 @@ import React from "react";
 import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
-const PhotoList = (props) => {
+const PhotoList = ({ photos, favorites, toggleFavorite }) => {
   return (
     <ul className="photo-list">
-      {props.photos.map((photo) => (
-        <PhotoListItem key={photo.id} photo={photo} />
+      {photos.map((photo) => (
+        <PhotoListItem
+          key={photo.id}
+          photo={photo}
+          isFavorite={favorites.includes(photo.id)}
+          toggleFavorite={toggleFavorite}
+        />
       ))}
     </ul>
   );
