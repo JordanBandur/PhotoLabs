@@ -11,6 +11,11 @@ const App = () => {
   const [favorites, setFavorites] = useState([]);
 
   const toggleFavorites = (photoId) => {
+    if (!photoId) {
+      console.error('Invalid photoId:', photoId);
+      return;
+    }
+
     setFavorites((prev) =>
       prev.includes(photoId) ? prev.filter((id) => id !== photoId) : [...prev, photoId]);
   };
