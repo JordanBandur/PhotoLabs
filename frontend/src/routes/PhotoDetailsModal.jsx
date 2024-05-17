@@ -1,19 +1,34 @@
 import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
+import PhotoList from 'components/PhotoList';
+import PhotoFavButton from '../components/PhotoFavButton';
 
-const PhotoDetailsModal = ({ isOpen, onClose, photo }) => {
+const PhotoDetailsModal = ({ isOpen, onClose, photo, favorites, toggleFavorites, openModal }) => {
   if (!isOpen || !photo) {
     return null;
   }
 
+  const isFavorite = favorites.includes(photo.id);
+
   return (
     <div className="photo-details-modal">
-      <button className="photo-details-modal__close-button" onClick={onClose}>
-        <img src={closeSymbol} alt="close symbol" />
-      </button>
+      <div className="photo-details-modal__top-bar">
+        <button className="photo-details-modal__close-button" onClick={onClose}>
+          <img src={closeSymbol} alt="close symbol" />
+        </button>
+      </div>
       <div className="photo-details-modal__images">
-        <img src={photo.urls.regular} alt={photo.title} className="photo-details-modal__image" />
+        <PhotoFavButton
+          photoId={photo.id}
+          isFavorite={isFavorite}
+          toggleFavorites={toggleFavorites}
+        />
+        <img
+          src={photo.urls.full}
+          alt={`${photo.user.username}'s photo`}
+          className="photo-details-modal__image"
+        />
         <div className="photo-details-modal__photographer-details">
           <img
             src={photo.user.profile}
@@ -26,6 +41,15 @@ const PhotoDetailsModal = ({ isOpen, onClose, photo }) => {
               {photo.location.city}, {photo.location.country}
             </p>
           </div>
+        </div>
+        <h2 className="photo-details-modal__header">Similar Photos</h2>
+        <div className="photo-details-modal__similar-photos">
+          <PhotoList
+            photos={Object.values(photo.similar_photos)}
+            favorites={favorites}
+            toggleFavorites={toggleFavorites}
+            openModal={openModal}
+          />
         </div>
       </div>
     </div>

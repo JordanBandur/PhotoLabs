@@ -3,21 +3,15 @@ import PhotoList from 'components/PhotoList';
 import TopNavigation from 'components/TopNavigationBar';
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = ({ topics, photos, openModal }) => {
-  const [favorites, setFavorites] = useState([]);
-
-  const toggleFavorites = (photoId) => {
-    setFavorites((prev) =>
-      prev.includes(photoId) ? prev.filter((id) => id !== photoId) : [...prev, photoId]);
-  };
-
+const HomeRoute = ({ topics, photos, openModal, toggleFavorites, favorites }) => {
+  
   return (
     <div className="home-route">
       <TopNavigation topics={topics} favorites={favorites} />
       <PhotoList
         photos={photos}
         favorites={favorites}
-        toggleFavorite={toggleFavorites}
+        toggleFavorites={toggleFavorites}
         openModal={openModal}
       />
     </div>
