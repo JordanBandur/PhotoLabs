@@ -13,6 +13,16 @@
   }
 }
 
+.error {
+  color: red;
+  margin: 16px;
+  padding: 8px;
+  border: 1px solid red;
+  background-color: #ffe6e6;
+  border-radius: 4px;
+}
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -32,6 +42,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

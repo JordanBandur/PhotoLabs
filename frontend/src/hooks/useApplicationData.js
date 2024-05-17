@@ -6,16 +6,19 @@ import useModal from './useModal';
 const useApplicationData = () => {
   const { isModalOpen, selectedPhoto, openModal, closeModal } = useModal();
   const [favorites, setFavorites] = useState([]);
+  const [error, setError] = useState(null);
 
   const toggleFavorites = (photoId) => {
-    if (!photoId) {
-      console.error('Invalid photoId:', photoId);
+    const photoExists = photos.some(photo => photo.id === photoId);
+    if (!photoExists) {
+      setError('Invalid photoId. Please try again.');
       return;
     }
 
     setFavorites((prev) =>
       prev.includes(photoId) ? prev.filter((id) => id !== photoId) : [...prev, photoId]
     );
+    setError(null);
   };
 
   return {
@@ -27,6 +30,7 @@ const useApplicationData = () => {
     closeModal,
     favorites,
     toggleFavorites,
+    error,
   };
 };
 

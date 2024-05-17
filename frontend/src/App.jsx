@@ -2,11 +2,10 @@ import React from 'react';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import useApplicationData from 'hooks/useApplicationData';
-import useModal from 'hooks/useModal';
 import './App.scss';
 
 const App = () => {
-  
+
   const {
     photos,
     topics,
@@ -16,10 +15,12 @@ const App = () => {
     closeModal,
     favorites,
     toggleFavorites,
+    error,
   } = useApplicationData();
 
   return (
     <div className="App">
+      {error && <div className="error">{error}</div>}
       <HomeRoute photos={photos}
         topics={topics}
         openModal={openModal}
