@@ -31,7 +31,7 @@ const reducer = (state, action) => {
       return { ...state, isModalOpen: false, selectedPhoto: null };
 
     default:
-      return state;
+      throw new Error(`Unsupported action type: ${action.type}`);
   }
 };
 
