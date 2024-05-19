@@ -1,11 +1,10 @@
-import { useReducer } from 'react';
-import photos from 'mocks/photos';
-import topics from 'mocks/topics';
+import { useReducer, useEffect } from 'react';
+import axios from 'axios';
 import { ActionTypes } from 'actions';
 
 const initialState = {
-  photos,
-  topics,
+  photos: [],
+  topics: [],
   isModalOpen: false,
   selectedPhoto: null,
   favorites: [],
@@ -13,7 +12,19 @@ const initialState = {
 };
 
 // Object storing various actions to be used by reducer
-const actionHandlers = { 
+const actionHandlers = {
+  [ActionTypes.SET_PHOTOS]: (state, action) => ({
+    ...state, photos: action.photos
+  }),
+
+  [ActionTypes.SET_TOPICS]: (state, action) => ({
+    ...state, topics: action.topics
+  }),
+
+  [ActionTypes.SET_ERROR]: (state, action) => ({
+    ...state, error: action.error
+  }),
+
   [ActionTypes.TOGGLE_FAVORITE]: (state, action) => {
     const photoExists = state.photos.some(photo => photo.id === action.photoId);
     if (!photoExists) {
@@ -24,16 +35,17 @@ const actionHandlers = {
       : [...state.favorites, action.photoId];
     return { ...state, favorites, error: null };
   },
+
   [ActionTypes.OPEN_MODAL]: (state, action) => ({
     ...state, isModalOpen: true, selectedPhoto: action.photo
   }),
+
   [ActionTypes.CLOSE_MODAL]: (state) => ({
     ...state, isModalOpen: false, selectedPhoto: null
   }),
 };
 
 const reducer = (state, action) => {
-
   // Using object lookup
   const handler = actionHandlers[action.type];
   return handler ? handler(state, action) : state;
@@ -63,6 +75,24 @@ const reducer = (state, action) => {
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    axios.get('/api/photos')
+      .then(response => {
+        dispatch({ type: ActionTypes.SET_PHOTOS, photos: response.data });
+      })
+      .catch(error => {
+        dispatch({ type: ActionTypes.SET_ERROR, error: 'Failed to fetch photos' });
+      });
+
+    axios.get('/api/topics')
+      .then(response => {
+        dispatch({ type: ActionTypes.SET_TOPICS, topics: response.data });
+      })
+      .catch(error => {
+        dispatch({ type: ActionTypes.SET_ERROR, error: 'Failed to fetch topics' });
+      });
+  }, []);
 
   const toggleFavorites = (photoId) => {
     dispatch({ type: ActionTypes.TOGGLE_FAVORITE, photoId });
