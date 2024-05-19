@@ -43,6 +43,10 @@ const actionHandlers = {
   [ActionTypes.CLOSE_MODAL]: (state) => ({
     ...state, isModalOpen: false, selectedPhoto: null
   }),
+
+  [ActionTypes.SET_PHOTOS_BY_TOPIC]: (state, action) => ({
+    ...state, photos: action.photos
+  }),
 };
 
 const reducer = (state, action) => {
@@ -94,6 +98,16 @@ const useApplicationData = () => {
       });
   }, []);
 
+  const fetchPhotosByTopic = (topicId) => {
+    axios.get(`/api/topics/photos/${topicId}`)
+      .then(response => {
+        dispatch({ type: ActionTypes.SET_PHOTOS_BY_TOPIC, photos: response.data });
+      })
+      .catch(error => {
+        dispatch({ type: ActionTypes.SET_ERROR, error: 'Failed to fetch photos for the topic' });
+      });
+  };
+
   const toggleFavorites = (photoId) => {
     dispatch({ type: ActionTypes.TOGGLE_FAVORITE, photoId });
   };
@@ -108,6 +122,7 @@ const useApplicationData = () => {
 
   return {
     ...state,
+    fetchPhotosByTopic,
     toggleFavorites,
     openModal,
     closeModal,

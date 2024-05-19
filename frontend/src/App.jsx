@@ -15,18 +15,22 @@ const App = () => {
     closeModal,
     favorites,
     toggleFavorites,
+    fetchPhotosByTopic,
     error,
   } = useApplicationData();
 
   return (
     <div className="App">
       {error && <div className="error">{error}</div>}
+
       <HomeRoute photos={photos}
         topics={topics}
         openModal={openModal}
         toggleFavorites={toggleFavorites}
         favorites={favorites}
+        fetchPhotosByTopic={fetchPhotosByTopic}
       />
+
       <PhotoDetailsModal
         isOpen={isModalOpen}
         onClose={closeModal}
