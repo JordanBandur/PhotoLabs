@@ -91,7 +91,8 @@ const useApplicationData = () => {
 
     axios.get('/api/topics')
       .then(response => {
-        dispatch({ type: ActionTypes.SET_TOPICS, topics: response.data });
+        const topicsWithAll = [{ id: null, title: 'All', slug: 'all' }, ...response.data];
+        dispatch({ type: ActionTypes.SET_TOPICS, topics: topicsWithAll });
       })
       .catch(error => {
         dispatch({ type: ActionTypes.SET_ERROR, error: 'Failed to fetch topics' });
@@ -99,13 +100,23 @@ const useApplicationData = () => {
   }, []);
 
   const fetchPhotosByTopic = (topicId) => {
-    axios.get(`/api/topics/photos/${topicId}`)
-      .then(response => {
-        dispatch({ type: ActionTypes.SET_PHOTOS_BY_TOPIC, photos: response.data });
-      })
-      .catch(error => {
-        dispatch({ type: ActionTypes.SET_ERROR, error: 'Failed to fetch photos for the topic' });
-      });
+    if (topicId === null) {
+      axios.get('/api/photos')
+        .then(response => {
+          dispatch({ type: ActionTypes.SET_PHOTOS, photos: response.data });
+        })
+        .catch(error => {
+          dispatch({ type: ActionTypes.SET_ERROR, error: 'Failed to fetch photos' });
+        });
+    } else {
+      axios.get(`/api/topics/photos/${topicId}`)
+        .then(response => {
+          dispatch({ type: ActionTypes.SET_PHOTOS_BY_TOPIC, photos: response.data });
+        })
+        .catch(error => {
+          dispatch({ type: ActionTypes.SET_ERROR, error: 'Failed to fetch photos for the topic' });
+        });
+    }
   };
 
   const toggleFavorites = (photoId) => {
