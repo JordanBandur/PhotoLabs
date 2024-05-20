@@ -30,6 +30,9 @@ cd backend
 npm start
 ```
 
+## Dependencies
+- axios 1.7.0 or above
+
 # Dev Notes
 The following is the project Structure, along with a breif explinations of the core files.
 
