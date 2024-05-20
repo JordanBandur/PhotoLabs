@@ -4,11 +4,14 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from 'components/PhotoList';
 import PhotoFavButton from '../components/PhotoFavButton';
 
+// Component to display the details of a photo in a modal
 const PhotoDetailsModal = ({ isOpen, onClose, photo, favorites, toggleFavorites, openModal }) => {
+  // If the modal is not open or there is no selected photo, return null (do not render anything)
   if (!isOpen || !photo) {
     return null;
   }
 
+  // Check if the current photo is in the list of favorites
   const isFavorite = favorites.includes(photo.id);
 
   return (

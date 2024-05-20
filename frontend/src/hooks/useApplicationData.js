@@ -2,6 +2,7 @@ import { useReducer, useEffect } from 'react';
 import axios from 'axios';
 import { ActionTypes } from 'actions';
 
+// Initial state for the application
 const initialState = {
   photos: [],
   topics: [],
@@ -25,6 +26,7 @@ const actionHandlers = {
     ...state, error: action.error
   }),
 
+  // Action to toggle favorite status of a photo
   [ActionTypes.TOGGLE_FAVORITE]: (state, action) => {
     const photoExists = state.photos.some(photo => photo.id === action.photoId);
     if (!photoExists) {
@@ -49,37 +51,18 @@ const actionHandlers = {
   }),
 };
 
+// Reducer function to manage state based on actions
 const reducer = (state, action) => {
-  // Using object lookup
+  // Using object lookup for action handlers
   const handler = actionHandlers[action.type];
   return handler ? handler(state, action) : state;
-
-  // Using switch
-  /*  switch (action.type) {
-     case ActionTypes.TOGGLE_FAVORITE:
-       const photoExists = state.photos.some(photo => photo.id === action.photoId);
-       if (!photoExists) {
-         return { ...state, error: 'Invalid photoId. Please try again.' };
-       }
-       const favorites = state.favorites.includes(action.photoId)
-         ? state.favorites.filter(id => id !== action.photoId)
-         : [...state.favorites, action.photoId];
-       return { ...state, favorites, error: null };
- 
-     case ActionTypes.OPEN_MODAL:
-       return { ...state, isModalOpen: true, selectedPhoto: action.photo };
- 
-     case ActionTypes.CLOSE_MODAL:
-       return { ...state, isModalOpen: false, selectedPhoto: null };
- 
-     default:
-       throw new Error(`Unsupported action type: ${action.type}`);
-   } */
 };
 
+// Custom hook to manage application data
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // Fetch initial data (photos and topics) when the component mounts
   useEffect(() => {
     axios.get('/api/photos')
       .then(response => {
@@ -99,8 +82,9 @@ const useApplicationData = () => {
       });
   }, []);
 
+  // Function to fetch photos by topic
   const fetchPhotosByTopic = (topicId) => {
-    if (topicId === null) {
+    if (topicId === null) { // Fetch all photos
       axios.get('/api/photos')
         .then(response => {
           dispatch({ type: ActionTypes.SET_PHOTOS, photos: response.data });
@@ -108,7 +92,7 @@ const useApplicationData = () => {
         .catch(error => {
           dispatch({ type: ActionTypes.SET_ERROR, error: 'Failed to fetch photos' });
         });
-    } else {
+    } else { // Fetch photos for a specific topic
       axios.get(`/api/topics/photos/${topicId}`)
         .then(response => {
           dispatch({ type: ActionTypes.SET_PHOTOS_BY_TOPIC, photos: response.data });

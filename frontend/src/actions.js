@@ -1,3 +1,4 @@
+// Actions for use in useApplicationData
 export const ActionTypes = {
   SET_PHOTOS: 'SET_PHOTOS',
   SET_TOPICS: 'SET_TOPICS',

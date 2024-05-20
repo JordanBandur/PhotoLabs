@@ -1,8 +1,10 @@
 import React from "react";
 import "../styles/TopicListItem.scss";
 
+// Component to display a single topic item
 const TopicListItem = ({ topic, onTopicClick }) => {
 
+  // Handle click to fetch photos by topic
   const handleClick = () => {
     onTopicClick(topic.id);
   };

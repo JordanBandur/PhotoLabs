@@ -2,8 +2,10 @@ import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from './PhotoFavButton';
 
+// Component to display a single photo item
 const PhotoListItem = ({ photo, isFavorite, toggleFavorites, openModal }) => {
 
+  // Handle click to open photo details modal
   const handleClick = () => {
     openModal(photo);
   };
