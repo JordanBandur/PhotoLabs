@@ -1,5 +1,5 @@
 # PhotoLabs
-The PhotoLabs project for the Web Development React course programming.
+PhotoLabs is a React-based single-page application (SPA) that allows users to view photos in different contexts. 
 
 # Screenshots
 ![Initial render](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/initial-render.png)
