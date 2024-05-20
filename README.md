@@ -2,6 +2,13 @@
 The PhotoLabs project for the Web Development React course programming.
 
 # Screenshots
+![Initial render](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/initial-render.png)
+![Open modal 1](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/open-modal-1.png)
+![Open modal 2](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/open-modal-2.png)
+![Open modal with main favorited](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/open-modal-fav-main-img.png)
+![Open modal with similar favorited](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/open-modal-fav-similar-img.png)
+![Closed modal with fav notification](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/close-modal-fav-notification.png)
+![Animals topic with favorites](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/animals-topic-favs.png)
 
 ## Setup
 
