@@ -8,7 +8,7 @@ const initialState = {
   topics: [],
   isModalOpen: false,
   selectedPhoto: null,
-  favorites: [],
+  favorites: JSON.parse(localStorage.getItem('favorites')) || [],
   error: null,
 };
 
@@ -32,9 +32,11 @@ const actionHandlers = {
     if (!photoExists) {
       return { ...state, error: 'Invalid photoId. Please try again.' };
     }
+
     const favorites = state.favorites.includes(action.photoId)
       ? state.favorites.filter(id => id !== action.photoId)
       : [...state.favorites, action.photoId];
+    localStorage.setItem('favorites', JSON.stringify(favorites));
     return { ...state, favorites, error: null };
   },
 
