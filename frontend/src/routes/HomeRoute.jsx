@@ -7,7 +7,9 @@ const HomeRoute = ({ topics, photos, openModal, toggleFavorites, favorites, fetc
 
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} favorites={favorites} fetchPhotosByTopic={fetchPhotosByTopic} />
+      <TopNavigation topics={topics}
+        favorites={favorites}
+        fetchPhotosByTopic={fetchPhotosByTopic} />
       <PhotoList
         photos={photos}
         favorites={favorites}

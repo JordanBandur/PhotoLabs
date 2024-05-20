@@ -18,14 +18,24 @@ const PhotoListItem = ({ photo, isFavorite, toggleFavorites, openModal }) => {
           isFavorite={isFavorite}
           toggleFavorites={toggleFavorites}
         />
-        <img src={photo.urls.regular} alt={`${photo.user.username}'s photo`} className="photo-list__image" onClick={handleClick} />
+
+        <img src={photo.urls.regular}
+          alt={`${photo.user.username}'s photo`}
+          className="photo-list__image"
+          onClick={handleClick} />
+
       </header>
       <section className="photo-list__user-details">
-        <img src={photo.user.profile} alt={`${photo.user.username}'s profile`} className="photo-list__user-profile" />
+
+        <img src={photo.user.profile}
+          alt={`${photo.user.username}'s profile`}
+          className="photo-list__user-profile" />
+
         <section className="photo-list__user-info">
           <p>{photo.user.name}</p>
           <p className="photo-list__user-location">{photo.location.city}, {photo.location.country}</p>
         </section>
+
       </section>
     </article>
   );
