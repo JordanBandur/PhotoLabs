@@ -110,7 +110,13 @@ const useApplicationData = () => {
   };
 
   const openModal = (photo) => {
-    dispatch({ type: ActionTypes.OPEN_MODAL, photo });
+    if (photo.similar_photos) {
+      dispatch({ type: ActionTypes.OPEN_MODAL, photo });
+    } else {
+      const similarPhotos = state.photos.filter(p => p.topic_id === photo.topic_id && p.id !== photo.id).slice(0, 8);
+      photo.similar_photos = similarPhotos;
+      dispatch({ type: ActionTypes.OPEN_MODAL, photo });
+    }
   };
 
   const closeModal = () => {
