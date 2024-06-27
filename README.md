@@ -10,6 +10,23 @@ PhotoLabs is a React-based single-page application (SPA) that allows users to vi
 ![Closed modal with fav notification](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/close-modal-fav-notification.png)
 ![Animals topic with favorites](https://github.com/JordanBandur/PhotoLabs/blob/main/frontend/src/assets/screenshots/animals-topic-favs.png)
 
+## Tech Stack
+
+### **Frontend Tech Stack**
+- React
+- React DOM
+- React Scripts (Create React App)
+- Axios
+- Sass (Dart Sass)
+- Web Vitals
+### **Testing Tools**
+- @testing-library/jest-dom
+- @testing-library/react
+- @testing-library/user-event
+### **Development Tools**
+- Dart Sass
+- ESLint (with configurations for React and Jest)
+
 ## Setup
 
 Install dependencies with `npm install` in each respective `/frontend` and `/backend`.
